@@ -5,7 +5,7 @@ services:
 variables:
   DOCKER_DRIVER: overlay
   SPRING_PROFILES_ACTIVE: gitlab-ci
-  USER_GITLAB: sanjaybsm
+  USER_GITLAB: Abdelalnassri
   APP_NAME: devoir2
   REPO: devoir2
 
