@@ -1,4 +1,4 @@
 FROM openjdk:8
-EXPOSE 8086
+VOLUME /tmp
 ADD target/devoir.jar devoir.jar
-ENTRYPOINT ["java","-jar","/devoir.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/devoir.jar"]

@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: devoir2
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: devoir2
+    spec:
+      containers:
+      - name: devoir2
+        image: registry.gitlab.com/Abdelalinassri/devoir2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: registry.gitlab.com
