@@ -1,0 +1,77 @@
+pipeline {
+    
+    agent any
+ 
+ tools{
+     maven 'apache-maven-3.8.1'
+ }
+
+    
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+               git credentialsId: 'git_credentials', url: 'https://github.com/safaa-09/ATp-Jenkins.git'
+            }
+        }
+        
+        stage('build Maven') {
+            steps {
+               sh 'mvn compile'
+            }
+        }
+        
+        
+        
+          stage('Test Unitaire') {
+            steps {
+         
+               sh 'mvn clean test'
+            
+            }
+        }
+        
+          stage('App Package') {
+            steps {
+     
+               sh 'mvn clean package'
+           
+            }
+        }
+        
+            
+    stage('Build Docker Image'){
+       
+     steps{
+        sh "docker build --tag safaa09/app:1.0.0 ."
+    }
+   }
+   
+     stage('Push Docker Image'){
+     steps{
+     withCredentials([string(credentialsId: 'dockerhubpass', variable: 'dockerHubPass')]) {
+        sh "docker login -u safaa09 -p ${dockerHubPass}"
+    }   
+        sh 'docker push safaa09/app:1.0.0'
+    }
+  } 
+    }
+    
+    post{
+        
+        always{
+            echo "Cette partie s'exécutera toujours"
+        }
+        
+        failure{
+            emailext body: "Ce Build $BUILD_NUMBER a échoué",
+            recipientProviders:[requestor()], subject: "build", to:
+            "safaa.achour@uit.ac.ma"
+        }
+        
+        success{
+            echo "Cette partie s'exécutera en cas de succès"
+        }
+    }
+    
+}
