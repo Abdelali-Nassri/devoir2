@@ -13,7 +13,7 @@ pipeline {
                 credentialsId: '123',
                 url: 'https://github.com/Abdelali-Nassri/devoir2.git'
 
-            	sh "ls -lat"
+            	
         	}
     	}
         
