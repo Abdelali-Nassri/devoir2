@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-               git credentialsId: 'git_credentials', url: 'https://github.com/safaa-09/ATp-Jenkins.git'
+               git credentialsId: 'git_credentials', url: 'https://github.com/Abdelali-nassri/devoir2.git'
             }
         }
         
@@ -43,16 +43,16 @@ pipeline {
     stage('Build Docker Image'){
        
      steps{
-        sh "docker build --tag safaa09/app:1.0.0 ."
+        sh "docker build --tag abdelalinassri/app:1.0.0 ."
     }
    }
    
      stage('Push Docker Image'){
      steps{
-     withCredentials([string(credentialsId: 'dockerhubpass', variable: 'dockerHubPass')]) {
-        sh "docker login -u safaa09 -p ${dockerHubPass}"
+     withCredentials([string(credentialsId: 'Abdo199861', variable: 'Abdo199861')]) {
+        sh "docker login -u abdelalinassri -p ${Abdo199861}"
     }   
-        sh 'docker push safaa09/app:1.0.0'
+        sh 'docker push abdelalinassri/app:1.0.0'
     }
   } 
     }
@@ -66,7 +66,7 @@ pipeline {
         failure{
             emailext body: "Ce Build $BUILD_NUMBER a échoué",
             recipientProviders:[requestor()], subject: "build", to:
-            "safaa.achour@uit.ac.ma"
+            "abdelali.nassri@yahoo.com"
         }
         
         success{
