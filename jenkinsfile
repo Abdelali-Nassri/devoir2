@@ -7,7 +7,11 @@ pipeline {
     
 
     stages {
-        
+        stage('Git Checkout') {
+            steps {
+               git credentialsId: '123', url: 'https://github.com/Abdelali-nassri/devoir2.git'
+            }
+        }
         
         stage('build Maven') {
             steps {
