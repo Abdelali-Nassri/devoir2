@@ -7,11 +7,15 @@ pipeline {
     
 
     stages {
-        stage('Git Checkout') {
-            steps {
-               git credentialsId: '123', url: 'https://github.com/Abdelali-nassri/devoir2.git'
-            }
-        }
+         stage('Checkout external proj') {
+       		 steps {
+           	 	git branch: 'main',
+                credentialsId: '123',
+                url: 'https://github.com/Abdelali-Nassri/devoir2.git'
+
+            	sh "ls -lat"
+        	}
+    	}
         
         stage('build Maven') {
             steps {
