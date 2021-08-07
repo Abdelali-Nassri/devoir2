@@ -51,9 +51,9 @@ pipeline {
    
      	  stage('Push Docker Image'){
 		 	  steps{
-     			  withCredentials([string(credentialsId: '1234', variable: 'c2d659ee-9bf9-420d-bb3b-483fe60a8a95')]) {
-        		  	 bat "docker login -u abdelalinassri -p ${c2d659ee-9bf9-420d-bb3b-483fe60a8a95}"
-   			  	  }   
+     			 
+        		  bat "docker login -u abdelalinassri -p ${c2d659ee-9bf9-420d-bb3b-483fe60a8a95}"
+   			  	  
         	  	  bat 'docker push abdelalinassri/app:1.0.0'
     	 	  }
   		  } 
