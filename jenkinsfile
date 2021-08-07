@@ -19,7 +19,7 @@ pipeline {
         
         stage('build Maven') {
             steps {
-               sh 'mvn compile'
+                bat 'mvn --batch-mode compile'
             }
         }
         
@@ -28,7 +28,7 @@ pipeline {
           stage('Test Unitaire') {
             steps {
          
-               sh 'mvn clean test'
+                bat 'mvn --batch-mode test'
             
             }
         }
@@ -36,7 +36,7 @@ pipeline {
           stage('App Package') {
             steps {
      
-               sh 'mvn clean package'
+                bat 'mvn --batch-mode package'
            
             }
         }
